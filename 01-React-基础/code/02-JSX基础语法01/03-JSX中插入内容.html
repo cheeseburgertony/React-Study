@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+
+  <script type="text/babel">
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          count: 1,
+          msg: 'Hello World',
+          arr: [1, 2, 3],
+          aaa: null,
+          bbb: undefined,
+          ccc: true,
+          person: {
+            name: 'tony',
+            age: 18
+          },
+          firstName: 'tony',
+          lastName: 'tsai',
+          age: 20,
+          movies: ['电影1', '电影2', '电影3']
+        }
+      }
+
+      render() {
+        const { count, msg, arr } = this.state
+        const { aaa, bbb, ccc } = this.state
+        const { person } = this.state
+        const { firstName, lastName } = this.state
+        const { age } = this.state
+        const { movies } = this.state
+
+        const fullName = firstName + ' ' + lastName
+
+        const ageText = age > 18 ? '成年' : '未成年'
+
+        const liEls = movies.map(item => <li key={item}>{item}</li>)
+
+        const getList = () => {
+          const liEls = movies.map(item => <li key={item}>{item}</li>)
+          return liEls
+        }
+        return (
+          <div>
+            {/* 1.当变量是Number,String,Array类型时,可以直接显示 */}
+            <h2>{count}</h2>
+            <h2>{msg}</h2>
+            <h2>{arr}</h2>
+
+            {/* 2.当变量时null,undefined,Boolean类型时,内容显示为空 */}
+            {/* 如果非要显示,可以转成字符串 */}
+            <h2>{'' + aaa}</h2>
+            <h2>{String(bbb)}</h2>
+            <h2>{ccc.toString()}</h2>
+
+            {/* 3.Object对象类型不能直接作为子元素,必须确定要获取的是对象中的哪个属性 */}
+            <h2>{person.name}</h2>
+            <h2>{person.age}</h2>
+
+            {/* 4.可以插入对应的表达式 */}
+            <h2>{10 + 20}</h2>
+            <h2>{firstName + ' ' + lastName}</h2>
+            <h2>{fullName}</h2>
+
+            {/* 5.可以插入三元运算符 */}
+            <h2>{age > 18 ? '成年' : '未成年'}</h2>
+            <h2>{ageText}</h2>
+
+            {/* 6.可以调用方法获取结果 */}
+            <ul>{liEls}</ul>
+            <ul>{movies.map(item => <li key={item}>{item}</li>)}</ul>
+            <ul>{getList()}</ul>
+          </div>
+        )
+      }
+    }
+
+    // 2.创建root并渲染app组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

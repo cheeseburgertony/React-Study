@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+
+  <script type="text/babel">
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          title: 'Hello',
+          imgUrl: 'https://img1.baidu.com/it/u=3518673092,2032183538&fm=253&fmt=auto&app=138&f=JPEG?w=781&h=500',
+          linkUrl: 'https://www.baidu.com',
+          isActive: false,
+          styleObj: { color: 'red', fontSize: '30px' }
+        }
+      }
+
+      render() {
+        const { title, imgUrl, linkUrl, isActive,styleObj } = this.state
+
+        // class绑定写法1：字符串拼接
+        const className = `aaa bbb ${isActive ? 'active' : ''}`
+        // class绑定写法2：将所有的class放到数组中
+        const classList = ['aaa', 'bbb']
+        if (isActive) classList.push('active')
+        // class绑定写法3：使用第三方库classnames  npm install classnames
+
+        return (
+          <div>
+            {/* 1.基本绑定 */}
+            <h2 title={title}>哈哈哈</h2>
+            <img src={imgUrl} alt="" />
+            <a href={linkUrl}>百度</a>
+
+            {/* 2.绑定class属性：最好使用className */}
+            <h2 className={className}>哈哈哈哈</h2>
+            <h2 className={classList.join(' ')}>哈哈哈哈</h2>
+
+            {/* 3.绑定style属性：绑定对象类型 */}
+            <h2 style={{ color: 'red', fontSize: '30px' }}>哈哈哈哈</h2>
+            <h2 style={styleObj}>哈哈哈哈</h2>
+          </div>
+        )
+      }
+    }
+
+    // 2.创建root并渲染app组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>
