@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+
+  <script type="text/babel">
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          msg: 'Hello World',
+          isShow: true
+        }
+      }
+
+      handleSwith() {
+        this.setState({
+          isShow: !this.state.isShow
+        })
+      }
+
+
+      render() {
+        const { isShow } = this.state
+        return (
+          <div>
+            <button onClick={() => this.handleSwith()}>切换</button>
+            {isShow && <h2>{this.state.msg}</h2>}
+            {<h2 style={{ display: isShow ? 'block' : 'none' }}>隐藏</h2>}
+          </div>
+        )
+      }
+    }
+
+    // 2.创建root并渲染app组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

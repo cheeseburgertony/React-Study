@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="root"></div>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+
+  <script type="text/babel">
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          msg: 'Hello World',
+          movies: ['电影1', '电影2', '电影3', '电影4'],
+          activeIndex: 0
+        }
+      }
+
+
+      handleCilck(index) {
+        this.setState({
+          activeIndex: index
+        })
+      }
+
+      render() {
+        const { movies, activeIndex } = this.state
+        return (
+          <div>
+            <ul>
+              {movies.map((item, index) => (
+                <li
+                  key={item}
+                  className={index === activeIndex ? 'active' : ''}
+                  onClick={() => this.handleCilck(index)}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    }
+
+    // 2.创建root并渲染app组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

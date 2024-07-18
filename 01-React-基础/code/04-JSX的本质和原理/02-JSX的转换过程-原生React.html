@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+
+  <script>
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          msg: 'Hello World'
+        }
+      }
+
+
+      /*
+      JSX中的东西会通过babel被转化为React.createElement。
+      React.createElement('div', {class, id}, [])这样的函数。
+      这些函数经过里面的嵌套关系最终形成一棵元素树（对象树），也就是虚拟DOM，React再根据这些虚拟DOM再渲染生成真实DOM。
+      虚拟DOM就是由JS对象模拟成类似于div这样的标签。里面的每个节点就是虚拟节点。
+      
+        React.createElement(component, props, ...children)
+        参数一：type 当前ReactElement的类型，如果是组件就是组件的名称
+        参数二：config 以对象的方式存储jsx中的属性
+        参数三：children 存放在标签中的内容，(如果标签里还套着其他标签的话，
+                会以剩余参数的形式传入一个个React.createElement(component, props, ...children))，
+                最终以children数组的方式进行存储
+      */
+      render() {
+        const element = React.createElement(
+          "div",
+          null,
+  /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "header"
+            },
+            "Header"
+          ),
+  /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "content"
+            },
+    /*#__PURE__*/ React.createElement("div", {
+              className: "banner"
+            }),
+    /*#__PURE__*/ React.createElement(
+              "ul",
+              null,
+      /*#__PURE__*/ React.createElement(
+                "li",
+                null,
+                "\u5217\u8868\u6570\u636E1"
+              ),
+      /*#__PURE__*/ React.createElement(
+                "li",
+                null,
+                "\u5217\u8868\u6570\u636E2"
+              ),
+      /*#__PURE__*/ React.createElement(
+                "li",
+                null,
+                "\u5217\u8868\u6570\u636E3"
+              ),
+      /*#__PURE__*/ React.createElement(
+                "li",
+                null,
+                "\u5217\u8868\u6570\u636E4"
+              ),
+      /*#__PURE__*/ React.createElement(
+                "li",
+                null,
+                "\u5217\u8868\u6570\u636E5"
+              ),
+      /*#__PURE__*/ React.createElement("li", null, "\u5217\u8868\u6570\u636E6")
+            )
+          ),
+  /*#__PURE__*/ React.createElement(
+            "div",
+            {
+              className: "fotter"
+            },
+            "Footer"
+          )
+        );
+
+        return element
+      }
+    }
+
+    // 2.创建root并渲染app组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(React.createElement(App, null))
+  </script>
+</body>
+
+</html>

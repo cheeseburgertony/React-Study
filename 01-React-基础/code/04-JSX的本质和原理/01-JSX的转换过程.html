@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+
+  <script type="text/babel">
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          msg: 'Hello World'
+        }
+      }
+
+
+      /*
+      JSX中的东西会通过babel被转化为React.createElement。
+      React.createElement('div', {class, id}, [])这样的函数。
+      这些函数经过里面的嵌套关系最终形成一棵元素树（对象树），也就是虚拟DOM，React再根据这些虚拟DOM再渲染生成真实DOM。
+      虚拟DOM就是由JS对象模拟成类似于div这样的标签。里面的每个节点就是虚拟节点。
+        React.createElement(component, props, ...children)
+        参数一：type 当前ReactElement的类型，如果是组件就是组件的名称
+        参数二：config 以对象的方式存储jsx中的属性
+        参数三：children 存放在标签中的内容，(如果标签里还套着其他标签的话，
+                会以剩余参数的形式传入一个个React.createElement(component, props, ...children))，
+                最终以children数组的方式进行存储
+      */
+      render() {
+        return (
+          <div>
+            <div className="header">Header</div>
+            <div className="content">
+              <div className="banner"></div>
+              <ul>
+                <li>列表数据1</li>
+                <li>列表数据2</li>
+                <li>列表数据3</li>
+                <li>列表数据4</li>
+                <li>列表数据5</li>
+                <li>列表数据6</li>
+              </ul>
+            </div>
+            <div className="fotter">Footer</div>
+          </div>
+        )
+      }
+    }
+
+    // 2.创建root并渲染app组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>

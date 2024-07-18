@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react-dom.js"></script>
+  <script src="../lib/babel.js"></script>
+
+  <script type="text/babel">
+    // onClick在内部的执行过程举例
+    // obj中的foo假如是我们的触发点击事件要执行的函数
+    const obj = {
+      foo: function () {
+        console.log(this);
+      }
+    }
+
+    obj.foo() // this -> obj
+
+    //  模拟onClik内部 又出现一个config对象，里面有一个方法叫onClick要取到要执行的函数foo
+    const config = {
+      onClick: obj.foo
+    }
+    config.onClick() // this -> config
+
+    // 最后onClick内部再通过click取到config中的onClick再进行调用
+    const click = config.onClick  // 这里由于只是取config中的onClick并没有执行，所以不会发生隐式调用，所以this指向的是undefined
+    click()
+
+
+
+
+    /*
+      this的四种绑定规则
+      1.默认绑定：独立执行 foo()  非严格模式指向window 严格模式为undefined
+      2.隐式绑定：被一个对象执行  obj.foo()  this -> obj
+      3.显式绑定：手动绑定 call/apply/bind foo.call('aaa')  this -> String('aaa')
+      4.new绑定: new Foo() 创建一个新对象 this -> 创建的新对象  (新对象赋值给this)
+    */
+
+
+    // 1.定义App根组件
+    class App extends React.Component {
+      constructor() {
+        super()
+        this.state = {
+          counter: 0
+        }
+        this.btn1Click = this.btn1Click.bind(this)
+      }
+
+      btn1Click() {
+        this.setState({
+          counter: this.state.counter + 1
+        })
+      }
+
+      // 由于这里箭头函数默认没有this，会自动往上一个作用域找，所以这里的this指向的是组件实例
+      btn2Click = () => {
+        this.setState({
+          counter: 100
+        })
+      }
+
+      btn3Click() {
+        this.setState({
+          counter: 999
+        })
+      }
+
+      render() {
+        const { counter } = this.state
+        return (
+          <div>
+            <h2>counter:{counter}</h2>
+            {/* 1.this绑定方式一：bind绑定 */}
+            <button onClick={this.btn1Click}>按钮1</button>
+            {/* 2.this绑定方式二：ES6 class fields */}
+            <button onClick={this.btn2Click}>按钮2</button>
+            {/* 3.this绑定方式三：直接传入一个箭头函数 */}
+            {/* 由于这里直接使用箭头函数，当事件触发时会执行箭头函数，然后执行里面的函数，执行里面的函数是隐式绑定，这里的this来自render函数，所以this也是指向组件实例 */}
+            <button onClick={() => this.btn3Click()}>按钮3</button>
+          </div>
+        )
+      }
+    }
+
+    // 2.创建root并渲染App组件
+    const root = ReactDOM.createRoot(document.querySelector('#root'))
+    root.render(<App />)
+  </script>
+</body>
+
+</html>
