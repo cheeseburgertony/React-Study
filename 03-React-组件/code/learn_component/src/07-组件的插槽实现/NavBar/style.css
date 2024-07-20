@@ -1,0 +1,22 @@
+h1,h2{
+  margin: 0;
+  padding: 0;
+}
+
+.nav-bar {
+  display: flex;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.nav-bar .left,
+.nav-bar .right {
+  width: 80px;
+  background-color: skyblue;
+}
+
+.nav-bar .center {
+  flex: 1;
+  background-color: pink;
+}
