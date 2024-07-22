@@ -1,4 +1,4 @@
-import React, { createRef, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 
 export class App extends PureComponent {
   constructor() {
@@ -11,11 +11,8 @@ export class App extends PureComponent {
         { value: 'sing', text: '唱', isChecked: false },
         { value: 'dance', text: '跳', isChecked: false },
         { value: 'rap', text: 'rap', isChecked: false }
-      ],
-      fruit: ['apple'],
-      instro: 'tony'
+      ]
     }
-    this.instroRef = createRef()
   }
 
   handleChange(e) {
@@ -36,21 +33,6 @@ export class App extends PureComponent {
     this.setState({ hobbies })
   }
 
-  handleFruitChange(e) {
-    // select 单选
-    // this.setState({ fruit: e.target.value })
-
-    // select 多选
-    // console.log(e.target.selectedOptions);
-    // 通过使用Array.from将这个类数组对象转化为数组，才可使用数组的一些方法
-    // 额外补充：Array.from(可迭代对象)
-    // 也可以用来Array.from(arguments)
-    const option = Array.from(e.target.selectedOptions, item => item.value)
-    // console.log(option);
-    this.setState({ fruit: option })
-
-  }
-
   handleSubmit(e) {
     // 1.阻止默认行为
     e.preventDefault()
@@ -58,12 +40,11 @@ export class App extends PureComponent {
     console.log('获取所有的输入内容');
     console.log(this.state.username, this.state.password);
     console.log('获取爱好', this.state.hobbies.filter(item => item.isChecked).map(item => item.value));
-    console.log('获取非受控组件的value:', this.instroRef.current.value);
 
     // 3.以网络请求的方式，将数据传递给服务器(ajax/fetch/axios)
   }
   render() {
-    const { username, password, isChecked, hobbies, fruit, instro } = this.state
+    const { username, password, isChecked, hobbies } = this.state
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
@@ -92,17 +73,6 @@ export class App extends PureComponent {
               )
             })}
           </div>
-
-          {/* select */}
-          <select value={fruit} onChange={e => this.handleFruitChange(e)} multiple>
-            <option value="apple">苹果</option>
-            <option value="banana">香蕉</option>
-            <option value="orange">橘子</option>
-          </select>
-
-          {/* 非受控组件 */}
-          {/* 使用defaultValue来确定默认值 */}
-          <input type="text" defaultValue={instro} ref={this.instroRef} />
           <div>
             <button type='submit'>提交</button>
           </div>

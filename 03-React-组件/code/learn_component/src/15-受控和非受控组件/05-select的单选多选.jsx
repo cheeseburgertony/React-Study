@@ -1,4 +1,4 @@
-import React, { createRef, PureComponent } from 'react'
+import React, { PureComponent } from 'react'
 
 export class App extends PureComponent {
   constructor() {
@@ -12,10 +12,8 @@ export class App extends PureComponent {
         { value: 'dance', text: '跳', isChecked: false },
         { value: 'rap', text: 'rap', isChecked: false }
       ],
-      fruit: ['apple'],
-      instro: 'tony'
+      fruit: ['apple']
     }
-    this.instroRef = createRef()
   }
 
   handleChange(e) {
@@ -58,12 +56,11 @@ export class App extends PureComponent {
     console.log('获取所有的输入内容');
     console.log(this.state.username, this.state.password);
     console.log('获取爱好', this.state.hobbies.filter(item => item.isChecked).map(item => item.value));
-    console.log('获取非受控组件的value:', this.instroRef.current.value);
 
     // 3.以网络请求的方式，将数据传递给服务器(ajax/fetch/axios)
   }
   render() {
-    const { username, password, isChecked, hobbies, fruit, instro } = this.state
+    const { username, password, isChecked, hobbies, fruit } = this.state
     return (
       <div>
         <form onSubmit={e => this.handleSubmit(e)}>
@@ -99,10 +96,6 @@ export class App extends PureComponent {
             <option value="banana">香蕉</option>
             <option value="orange">橘子</option>
           </select>
-
-          {/* 非受控组件 */}
-          {/* 使用defaultValue来确定默认值 */}
-          <input type="text" defaultValue={instro} ref={this.instroRef} />
           <div>
             <button type='submit'>提交</button>
           </div>
