@@ -17,7 +17,10 @@ import ReactDOM from 'react-dom/client';
 // import App from './16-React高阶组件/05-高阶组件应用-生命周期拦截.jsx';
 // import App from './17-React的Portals/App';
 // import App from './18-React的Fragment/App';
-import App from './19-React的严格模式/App';
+// import App from './19-React的严格模式/App';
+// import App from './20-React动画实现/01-CSSTransition动画/App';
+// import App from './20-React动画实现/02-SwitchTransition/App';
+import App from './20-React动画实现/03-TransitionGroup/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

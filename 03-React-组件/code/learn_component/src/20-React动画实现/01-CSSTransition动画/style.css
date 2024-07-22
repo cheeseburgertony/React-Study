@@ -1,0 +1,35 @@
+/* 出现动画 */
+/* .tony-appear {
+  transform: translateX(-150px);
+}
+
+.tony-appear-active {
+  transform: translateX(0);
+  transition: transform 2s ease;
+} */
+
+/* 进入动画 */
+.tony-appear,
+.tony-enter {
+  /* 进入时的初始状态 */
+  opacity: 0;
+}
+
+.tony-appear-active,
+.tony-enter-active {
+  /* 进入过程中的状态 */
+  opacity: 1;
+  transition: opacity 2s ease;
+}
+
+/* 离开动画 */
+.tony-exit {
+  /* 离开时的状态 */
+  opacity: 1;
+}
+
+.tony-exit-active {
+  /* 离开过程中的状态 */
+  opacity: 0;
+  transition: opacity 2s ease;
+}
