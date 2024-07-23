@@ -1,0 +1,13 @@
+.section {
+  border: 1px solid green;
+}
+
+.title {
+  color: aqua;
+  font-size: 40px;
+}
+
+.content {
+  color: blueviolet;
+  font-size: 30px;
+}
