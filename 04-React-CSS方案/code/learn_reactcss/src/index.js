@@ -4,7 +4,9 @@ import ReactDOM from 'react-dom/client';
 // import App from './02-普通的CSS写法/App';
 // import App from './03-CSS_Modules/App';
 // import App from './04-Less编写方式/App';
-import App from './05-CSS_in_JS写法/App';
+// import App from './05-CSS_in_JS写法/App';
+import App from './06-classnames库/App';
+
 import { ThemeProvider } from 'styled-components';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
