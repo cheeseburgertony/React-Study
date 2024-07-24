@@ -15,6 +15,16 @@ const reducer = combineReducers({
   home: homeReducer,
   user:userReducer
 })
+
+// combineReducers实现原理(了解)
+// const reducer = (state = {}, action) => {
+//   return {
+//     counter: counterReducer(state.counter, action),
+//     home: homeReducer(state.home, action),
+//     user: userReducer(state.user, action)
+//   }
+// }
+
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
 
 export default store
