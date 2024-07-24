@@ -3,6 +3,8 @@ import Home from './pages/Home'
 import Profile from './pages/Profile'
 import './style.css'
 import store from './store'
+import About from './pages/About'
+import Category from './pages/Category'
 
 export class App extends PureComponent {
   constructor() {
@@ -13,7 +15,7 @@ export class App extends PureComponent {
   }
 
   componentDidMount() {
-    store.subscribe(()=>{
+    store.subscribe(() => {
       const state = store.getState()
       this.setState({ count: state.count })
     })
@@ -27,6 +29,8 @@ export class App extends PureComponent {
         <div className="page">
           <Home />
           <Profile />
+          <About />
+          <Category />
         </div>
       </div>
     )
