@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { addNumAction, subNumAction } from '../store/counter'
+import { addNumAction, subNumAction } from '../store/actionCreator'
 
 export class About extends PureComponent {
 
   render() {
-    const { count, banners, recommends, userInfo } = this.props
+    const { count, banners, recommends } = this.props
     return (
       <div>
-        <div>name:{userInfo.name}</div>
         <h2>About Counter: {count}</h2>
         <button onClick={e => this.props.addNum(1)}>+1</button>
         <button onClick={e => this.props.addNum(5)}>+5</button>
@@ -35,10 +34,9 @@ export class About extends PureComponent {
 
 // 将store里的state映射到props的函数   参数是来自store的state  返回一个对象，这个对象将被传递给组件的props
 const mapStateToProps = (state) => ({
-  count: state.counter.count,
-  banners: state.home.banners,
-  recommends: state.home.recommends,
-  userInfo: state.user.userInfo
+  count: state.count,
+  banners: state.banners,
+  recommends: state.recommends
 })
 
 // 将store里的dispatch映射到props的函数  参数是来自store的dispatch 返回一个对象，对象里是进行dispatch派发的方法，也将被传递到组件的props中

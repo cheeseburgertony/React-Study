@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { fetchHomeMultidataAction } from '../store/home'
+import { fetchHomeMultidataAction } from '../store/actionCreator'
 
 export class Category extends PureComponent {
 

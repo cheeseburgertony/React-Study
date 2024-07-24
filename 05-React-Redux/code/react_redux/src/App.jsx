@@ -10,13 +10,13 @@ export class App extends PureComponent {
   constructor() {
     super()
     this.state = {
-      count: store.getState().count
+      count: store.getState().counter.count
     }
   }
 
   componentDidMount() {
     store.subscribe(() => {
-      const state = store.getState()
+      const state = store.getState().counter
       this.setState({ count: state.count })
     })
   }
