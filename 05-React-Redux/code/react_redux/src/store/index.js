@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
-import { thunk } from "redux-thunk";
+// import { thunk } from "redux-thunk";
 import counterReducer from './counter'
 import homeReducer from './home'
 import userReducer from './user'
@@ -25,7 +25,7 @@ const reducer = combineReducers({
 //   }
 // }
 
-const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
+const store = createStore(reducer)
 
 // 对每次派发的dispatch进行拦截，进行日志打印(dispatch前打印action，dispatch后打印state)
 const log = (store) => {
@@ -39,6 +39,7 @@ const log = (store) => {
     console.log('派发之后的结果：', store.getState());
   }
   // 将修改之后的dispatch赋值给之前的dispatch，更换掉dispatch
+  // monkey patch：猴补丁 => 篡改现有的代码，对整体的执行逻辑进行修改
   store.dispatch = logAndDispatch
 
   // 简洁写法
@@ -47,9 +48,22 @@ const log = (store) => {
   //   next(action)
   //   console.log('派发之后的结果：', store.getState());
   // }
-
 }
-
 log(store)
+
+// redux-thunk实现
+const thunk = (store) => {
+  const next = store.dispatch
+  // 函数=>执行 对象=>直接派发
+  const dispatchThunk = (action) => {
+    if (typeof action === 'function') {
+      action(store.dispatch, store.getState)
+    } else {
+      next(action)
+    }
+  }
+  store.dispatch = dispatchThunk
+}
+thunk(store)
 
 export default store
