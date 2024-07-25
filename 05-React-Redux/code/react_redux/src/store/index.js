@@ -13,7 +13,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({ trace: tr
 const reducer = combineReducers({
   counter: counterReducer,
   home: homeReducer,
-  user:userReducer
+  user: userReducer
 })
 
 // combineReducers实现原理(了解)
@@ -26,5 +26,30 @@ const reducer = combineReducers({
 // }
 
 const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)))
+
+// 对每次派发的dispatch进行拦截，进行日志打印(dispatch前打印action，dispatch后打印state)
+const log = (store) => {
+  // 保留之前的dispatch
+  const next = store.dispatch
+  // 创建修改后的dispatch，然后将新的dispatch赋值给之前默认的store.dispatch
+  const logAndDispatch = (action) => {
+    console.log('当前派发的action：', action);
+    // 真正执行派发的代码，使用之前的dispatch进行派发
+    next(action)
+    console.log('派发之后的结果：', store.getState());
+  }
+  // 将修改之后的dispatch赋值给之前的dispatch，更换掉dispatch
+  store.dispatch = logAndDispatch
+
+  // 简洁写法
+  // store.dispatch = (action) => {
+  //   console.log('当前派发的action：', action);
+  //   next(action)
+  //   console.log('派发之后的结果：', store.getState());
+  // }
+
+}
+
+log(store)
 
 export default store
