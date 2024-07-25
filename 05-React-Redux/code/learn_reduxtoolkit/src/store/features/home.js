@@ -37,7 +37,7 @@ const homeSlice = createSlice({
   },
   reducers: {
     changeBanners(state, action) {
-      console.log(action);
+      // console.log(action);
       state.banners = action.payload
     },
     changeRecommends(state, action) {
