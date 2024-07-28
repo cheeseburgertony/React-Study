@@ -11,7 +11,8 @@ import { ThemeContext, UserContext } from './05-useContext的使用/context';
 // import App from './07-useCallback的使用/App';
 // import App from './08-useMemo的使用/App';
 // import App from './09-useRef的使用/02-useRef绑定值-解决闭包陷阱'
-import App from './10-useImperativeHandle的使用/App';
+// import App from './10-useImperativeHandle的使用/App';
+import App from './11-useLayoutEffect的使用/03-切换数字-useLayoutEffect';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
