@@ -13,14 +13,21 @@ import ReactDOM from 'react-dom/client';
 // import App from './09-useRef的使用/02-useRef绑定值-解决闭包陷阱'
 // import App from './10-useImperativeHandle的使用/App';
 // import App from './11-useLayoutEffect的使用/03-切换数字-useLayoutEffect';
-import App from './12-自定义Hooks/App';
+// import App from './12-自定义Hooks/App';
+import App from './13-redux中的hooks/App';
+
+
 import { TokenContext, UserContext } from './12-自定义Hooks/context';
+import { Provider } from 'react-redux';
+import store from './13-redux中的hooks/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <UserContext.Provider value={{ name: 'tony', age: 18 }}>
     <TokenContext.Provider value={'tonytoken'}>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </TokenContext.Provider>
   </UserContext.Provider>
 );
