@@ -7,7 +7,9 @@ import { ThemeContext, UserContext } from './05-useContext的使用/context';
 // import App from './04-useEffect的使用/02-修改标题-hook实现';
 // import App from './04-useEffect的使用/05-执行时机-控制回调执行';
 // import App from './05-useContext的使用/App';
-import App from './06-useReducer的使用/App';
+// import App from './06-useReducer的使用/App';
+// import App from './07-useCallback的使用/App';
+import App from './08-useMemo的使用/App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
