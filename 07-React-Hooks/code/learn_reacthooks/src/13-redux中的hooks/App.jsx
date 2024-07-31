@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { addNum, changeMessage, subNum } from './store/modules/counter'
 
 // memo高阶组件包裹起来的组件有对应额特点：只有props(或者自己本身的状态state)发生改变时才会重新渲染
@@ -12,7 +12,12 @@ const Home = memo(() => {
   // }), shallowEqual)
 
   // 发现只要在useSelector中直接写成这样的形式，直接返回对应的state中的数据，默认只会监听该数据是否发生变化而进行重新渲染
-  const message = useSelector((state) => state.counter.message)
+  // const message = useSelector((state) => state.counter.message)
+  // 如果不是以对象的形式返回这样写也是会监听state中其他数据变化，这个组件也会被重新渲染
+  // const { message } = useSelector(state => state.counter, shallowEqual)
+  // 所以要么写成返回一个对象的形式加上shallowEqual，要么直接返回值在state中对应的数据
+  const { message } = useSelector(state => ({ message: state.counter.message }), shallowEqual)
+
   const dispatch = useDispatch()
 
   const changeMessageHandle = () => {
