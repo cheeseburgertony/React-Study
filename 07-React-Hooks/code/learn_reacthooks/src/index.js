@@ -14,9 +14,9 @@ import ReactDOM from 'react-dom/client';
 // import App from './10-useImperativeHandle的使用/App';
 // import App from './11-useLayoutEffect的使用/03-切换数字-useLayoutEffect';
 // import App from './12-自定义Hooks/App';
-import App from './13-redux中的hooks/App';
+// import App from './13-redux中的hooks/App';
 // import App from './14-useId的使用/App';
-// import App from './15-useTransition的使用/02-useDeferredValue的使用';
+import App from './15-useTransition的使用/02-useDeferredValue的使用';
 
 
 import { TokenContext, UserContext } from './12-自定义Hooks/context';
